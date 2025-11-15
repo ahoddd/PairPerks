@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PairPerks – Love More. Spend Less. Earn More.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-section: #020617;
+      --bg-card: #020617;
+      --accent-blue: #3b82f6;
+      --accent-pink: #ec4899;
+      --accent-gold: #fbbf24;
+      --accent-green: #22c55e;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 22px 50px rgba(0,0,0,0.7);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 90%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.96), rgba(2,6,23,0.75));
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background:
+        conic-gradient(from 210deg,
+          #3b82f6,
+          #ec4899,
+          #f97316,
+          #22c55e,
+          #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 17px;
+      color: #020617;
+      box-shadow: 0 0 24px rgba(59,130,246,0.9);
+    }
+
+    .brand-text-main {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pill span.value {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      font-size: 12px;
+      padding: 7px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      background: rgba(15,23,42,1);
+      color: var(--text-main);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #3b82f6, #6366f1);
+      color: #f9fafb;
+      box-shadow: 0 16px 30px rgba(37,99,235,0.8);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 20px 40px rgba(37,99,235,0.95);
+      background: linear-gradient(to right, #2563eb, #4f46e5);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 32px 0 40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 5vw, 40px);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #3b82f6, #ec4899);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 480px;
+    }
+
+    .hero-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hero-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      font-size: 10px;
+      padding: 3px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* HERO RIGHT – CARD */
+    .hero-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31,41,55,1);
+      background: radial-gradient(circle at top left,#020617,#020617 40%,#050b18 100%);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 200deg,
+        rgba(59,130,246,0.4),
+        transparent,
+        rgba(236,72,153,0.4),
+        transparent
+      );
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill-status {
+      font-size: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      padding: 3px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill-status span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .hero-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-card-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .metric-row span.value {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      border: 1px solid rgba(30,64,175,0.5);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 70%;
+      border-radius: inherit;
+      background: linear-gradient(to right, #22c55e, #3b82f6);
+      box-shadow: 0 0 16px rgba(59,130,246,0.9);
+    }
+
+    .hero-card-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .hero-card-footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tiny-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 2px 6px;
+      font-size: 9px;
+      background: rgba(15,23,42,0.9);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 28px 0;
+      border-top: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31,41,55,1);
+      background: radial-gradient(circle at top left,#020617,#050b18 70%,#020617);
+      padding: 14px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+    }
+
+    .card-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .card-list li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .card-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent-blue);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 10px;
+      padding: 2px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(15,23,42,0.9);
+      color: var(--text-muted);
+    }
+
+    .tag.blue {
+      border-color: rgba(59,130,246,0.8);
+      color: #bfdbfe;
+    }
+
+    .tag.green {
+      border-color: rgba(34,197,94,0.8);
+      color: #bbf7d0;
+    }
+
+    .tag.pink {
+      border-color: rgba(236,72,153,0.8);
+      color: #f9a8d4;
+    }
+
+    .tag.gold {
+      border-color: rgba(234,179,8,0.9);
+      color: #facc15;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    /* WAITLIST SECTION */
+    .waitlist {
+      padding: 30px 0 40px;
+    }
+
+    .waitlist-inner {
+      border-radius: 26px;
+      border: 1px solid rgba(31,41,55,1);
+      background: radial-gradient(circle at top,#020617,#020617 35%,#050b18 100%);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.9);
+      padding: 18px 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .waitlist-inner::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 200deg,
+        rgba(59,130,246,0.35),
+        transparent,
+        rgba(236,72,153,0.35),
+        transparent
+      );
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .waitlist-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 18px;
+    }
+
+    .waitlist-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .waitlist-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .waitlist-points {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .waitlist-points li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .waitlist-points li span.icon {
+      font-size: 13px;
+    }
+
+    .waitlist-form {
+      border-radius: 18px;
+      border: 1px solid rgba(31,41,55,1);
+      background: rgba(15,23,42,0.95);
+      padding: 10px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .field label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .field input,
+    .field select {
+      border-radius: 999px;
+      border: 1px solid rgba(31,41,55,1);
+      background: #020617;
+      padding: 7px 10px;
+      font-size: 11px;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: rgba(59,130,246,0.9);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.7);
+    }
+
+    .waitlist-btn-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tiny-note {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(15,23,42,0.9);
+      padding: 14px 16px 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .footer-link:hover {
+      color: #e5e7eb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .waitlist-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-right {
+        justify-content: flex-start;
+      }
+      section {
+        padding: 24px 0;
+      }
+      .hero {
+        padding-top: 22px;
+      }
+      .waitlist-inner {
+        padding: 16px 14px 18px;
+      }
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="shell header-inner">
+        <div class="brand">
+          <div class="brand-logo">PP</div>
+          <div>
+            <div class="brand-text-main">PairPerks</div>
+            <div class="brand-text-sub">Love more. Spend less. Earn more.</div>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="pill">
+            Early Access <span class="value">Now Open</span>
+          </div>
+          <button class="btn btn-outline" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+            Join Waitlist
+          </button>
+          <button class="btn btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+            Get Early Access →
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="shell hero-inner">
+          <div>
+            <div class="hero-eyebrow">For couples, families & partners</div>
+            <h1 class="hero-title">
+              <span class="hero-highlight">PairPerks™</span><br />
+              Save more together. Earn rewards for real life.
+            </h1>
+            <p class="hero-sub">
+              The first rewards platform built exclusively for couples and families.
+              Save money on dates, trips and outings, earn XP and badges, complete
+              challenges, and discover other verified pairs & families — all in one
+              app.
+            </p>
+            <div class="hero-badges-row">
+              <div class="hero-badge">💑 Couples & partners</div>
+              <div class="hero-badge">👨‍👩‍👧 Families & FamiSphere</div>
+              <div class="hero-badge">🎮 Challenges, riddles & QR hunts</div>
+              <div class="hero-badge">🛡 Safety-first design</div>
+              <div class="hero-badge">✈️ AI travel savings</div>
+            </div>
+            <div class="hero-cta-row">
+              <button class="btn btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+                Join the Waitlist
+              </button>
+              <button class="btn btn-outline" onclick="document.getElementById('features-couples').scrollIntoView({behavior:'smooth'})">
+                See How It Works
+              </button>
+            </div>
+            <div class="hero-footnote">
+              🔓 Founding members get exclusive badges, lifetime perks & early access to
+              new cities.
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="pill-status">
+                <span class="dot"></span> Pilot Phase · Invitation Only
+              </div>
+              <div class="hero-card-title">PairPerks Preview</div>
+              <div class="hero-card-sub">
+                A single app where couples and families save money on experiences and
+                get rewarded for going out together.
+              </div>
+
+              <div class="hero-card-metrics">
+                <div class="metric-row">
+                  <span>Target savings per couple</span>
+                  <span class="value">20–50% / month</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill"></div>
+                </div>
+                <div class="metric-row">
+                  <span>Badges & XP system</span>
+                  <span class="value">Seasonal, event & milestones</span>
+                </div>
+                <div class="metric-row">
+                  <span>Safety</span>
+                  <span class="value">ID verified, panic + trust</span>
+                </div>
+              </div>
+
+              <div class="hero-card-footer">
+                <div class="hero-card-footer-row">
+                  <span class="tiny-chip">💘 CoupleSphere™</span>
+                  <span class="tiny-chip">👪 FamiSphere™</span>
+                  <span class="tiny-chip">✈️ Travel AI</span>
+                  <span class="tiny-chip">🎟 Partner perks</span>
+                </div>
+                <div>
+                  <span class="muted">
+                    This page is for early interest only — the full app is in development. Join
+                    the waitlist to be notified when your city opens.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY SECTION -->
+      <section id="why">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Why PairPerks exists</div>
+            <h2 class="section-title">Dating & family life got expensive. We fix that.</h2>
+            <p class="section-sub">
+              Eating out, taking trips, visiting arcades and attractions — it all adds up.
+              PairPerks gives you rewards, challenges and perks that only unlock when you
+              show up together.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">For couples</div>
+              <div class="card-title">More date nights. Less stress.</div>
+              <p class="card-sub">
+                Save on restaurants, activities, getaways and entertainment designed for two.
+              </p>
+              <ul class="card-list">
+                <li>Discounts at participating restaurants, arcades, spas & more.</li>
+                <li>Earn PairScore™ points every time you go out together.</li>
+                <li>Unlock new perks by completing challenges & visiting new places.</li>
+                <li>Optional CoupleSphere discovery to meet other verified couples.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag blue">💑 CoupleSphere™</span>
+                <span class="tag green">💸 PairScore™</span>
+                <span class="tag pink">🎮 Challenges</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">For families</div>
+              <div class="card-title">Make memories, not just receipts.</div>
+              <p class="card-sub">
+                FamiSphere connects families to deals, quests and other families with similar vibes.
+              </p>
+              <ul class="card-list">
+                <li>Family discounts at arcades, parks, zoos, attractions & resorts.</li>
+                <li>Earn FamiScore™ for check-ins, events and seasonal quests.</li>
+                <li>Optional discovery to meet other families in a controlled way.</li>
+                <li>Teen mode with parental controls (planned future version).</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag green">👪 FamiSphere™</span>
+                <span class="tag blue">⭐ FamiScore™</span>
+                <span class="tag pink">🎒 Family quests</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">For partners</div>
+              <div class="card-title">Bring in groups that actually show up.</div>
+              <p class="card-sub">
+                Restaurants, hotels, arcades, and venues can offer perks that only unlock when
+                pairs or families arrive & check in.
+              </p>
+              <ul class="card-list">
+                <li>Feature your business in the PairPerks app.</li>
+                <li>Offer discounts, bonus perks or secret QR quests.</li>
+                <li>Run NumberGuess or riddle-based challenges for extra fun.</li>
+                <li>See how many couples/families you’ve brought in each month.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag gold">🏢 Partner Console</span>
+                <span class="tag blue">📊 Analytics</span>
+                <span class="tag green">🎯 New traffic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COUPLES / FAMILIES / CHALLENGES -->
+      <section id="features-couples">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Core experience</div>
+            <h2 class="section-title">Rewards for doing life together.</h2>
+            <p class="section-sub">
+              PairPerks rewards shared experiences — not just spending. Whether it’s a date night,
+              a weekend trip or a family outing, you earn perks for showing up.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">CoupleSphere™</div>
+              <div class="card-title">For couples who like to explore.</div>
+              <p class="card-sub">
+                Opt in to see other verified couples, double-date opportunities, and carpool options
+                for resorts, events or getaways.
+              </p>
+              <ul class="card-list">
+                <li>Build a shared profile as a pair.</li>
+                <li>Set your vibes: chill, adventurous, nightlife, family-oriented, etc.</li>
+                <li>Turn on “trusted pairs only” to filter for safe, verified profiles.</li>
+                <li>Grow your CoupleSphere score with successful meetups & check-ins.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag blue">🔒 Trusted-pairs-only mode</span>
+                <span class="tag green">🛂 ID-verified checkmark</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">FamiSphere™</div>
+              <div class="card-title">For families who want community.</div>
+              <p class="card-sub">
+                Create a family profile (parents + kids). Meet other families nearby for
+                playdates, trips, and group outings.
+              </p>
+              <ul class="card-list">
+                <li>Parents control visibility and teen access.</li>
+                <li>Collect FamiSphere badges for visits, events & seasonal challenges.</li>
+                <li>Carpool or split rental/resort costs with other families.</li>
+                <li>Only connect with families that pass your filters and safety preferences.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag green">🧭 FamiSphere profiles</span>
+                <span class="tag blue">🧩 Family challenges</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Challenges & XP</div>
+              <div class="card-title">Make the real world feel like a game.</div>
+              <p class="card-sub">
+                Get rewarded for exploring. Every challenge, check-in or trip can boost your score
+                and unlock better perks.
+              </p>
+              <ul class="card-list">
+                <li>QR hunts hidden inside partner locations.</li>
+                <li>Venue riddles with timed answers for bigger rewards.</li>
+                <li>NumberGuess games where partners pre-lock the winning number.</li>
+                <li>Seasonal events with limited edition badges to collect & show off.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag pink">🏅 Badges & streaks</span>
+                <span class="tag blue">⚡ XP & multipliers</span>
+                <span class="tag gold">🎁 Seasonal drops</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SAFETY + TRAVEL -->
+      <section id="safety-travel">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Safety & travel</div>
+            <h2 class="section-title">Safety first. Travel smarter.</h2>
+            <p class="section-sub">
+              PairPerks is built with safety and real-world logistics in mind — especially when
+              new people and new places are involved.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">Safety</div>
+              <div class="card-title">Designed for trust, not chaos.</div>
+              <p class="card-sub">
+                We’re building systems that respect privacy but still keep everyone safer.
+              </p>
+              <ul class="card-list">
+                <li>Optional ID/passport verification with a visible “Verified” checkmark.</li>
+                <li>Private info stays hidden — only the badge is visible to others.</li>
+                <li>Panic button to alert trusted contacts and log meetup location.</li>
+                <li>Safety ratings from partners & other pairs/families after visits.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag green">🛂 Verified badge</span>
+                <span class="tag pink">🚨 Panic button</span>
+                <span class="tag blue">🛡 SafeMeet scoring</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Travel AI</div>
+              <div class="card-title">Turn trips into high-value runs.</div>
+              <p class="card-sub">
+                PairPerks Travel AI (future feature) will search for cheaper flights, hotels and
+                local attractions around the dates and locations you choose.
+              </p>
+              <ul class="card-list">
+                <li>Find cheap flights that still work for couples & families.</li>
+                <li>Spot hotels close to arcades, parks, beaches & attractions.</li>
+                <li>Bundle food, activities and perks into one plan.</li>
+                <li>Earn extra XP multipliers while traveling.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag blue">✈️ Flight & hotel scan</span>
+                <span class="tag green">📍 Nearby attractions</span>
+                <span class="tag gold">🏆 Travel XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AFFILIATES -->
+      <section id="affiliates">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">For businesses & affiliates</div>
+            <h2 class="section-title">Bring in pairs that spend more — together.</h2>
+            <p class="section-sub">
+              PairPerks is built for restaurants, bars, arcades, hotels, resorts, entertainment
+              venues and family attractions that want groups, not just solo customers.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">How it works</div>
+              <div class="card-title">Turn perks into foot traffic.</div>
+              <p class="card-sub">
+                Offer a perk (discount, free item, upgrade, etc.) that unlocks when a couple or
+                family checks in at your location through the app.
+              </p>
+              <ul class="card-list">
+                <li>Create pair-specific or family-specific offers.</li>
+                <li>Hide a QR code at your location for bonus XP hunts.</li>
+                <li>Run NumberGuess or riddle challenges for fun rewards.</li>
+                <li>Give special rewards for milestones (10th visit, birthdays, etc.).</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Partner tiers (concept)</div>
+              <div class="card-title">Flexible for any size business.</div>
+              <p class="card-sub">
+                We’re planning simple monthly plans once the app is ready for public launch.
+              </p>
+              <ul class="card-list">
+                <li><strong>Starter</strong> – basic listing & simple perks.</li>
+                <li><strong>Pro</strong> – challenges, QR hunts, and priority placement.</li>
+                <li><strong>Elite</strong> – multi-location, sponsored badges & analytics.</li>
+                <li><strong>Enterprise</strong> – custom integrations and city-wide promos.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag gold">📈 High-intent guests</span>
+                <span class="tag blue">🔐 Pay-for-performance ideas</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Interested?</div>
+              <div class="card-title">Apply as an early partner.</div>
+              <p class="card-sub">
+                If you’re a business owner, you can join the early interest list and be among
+                the first venues in your city.
+              </p>
+              <ul class="card-list">
+                <li>Early partners get extra visibility when we launch.</li>
+                <li>Help shape how perks and challenges work for your category.</li>
+                <li>Access future tools for in-app advertising & featured placement.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag pink">🏢 Restaurants & bars</span>
+                <span class="tag blue">🎮 Arcades & attractions</span>
+                <span class="tag green">🏨 Hotels & resorts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WAITLIST -->
+      <section id="waitlist" class="waitlist">
+        <div class="shell">
+          <div class="waitlist-inner">
+            <div class="waitlist-content">
+              <div>
+                <div class="waitlist-title">Join the first wave of PairPerks.</div>
+                <p class="waitlist-sub">
+                  Founding members will help shape the product, test features early, and unlock
+                  unique badges and perks that won’t be available later.
+                </p>
+                <ul class="waitlist-points">
+                  <li><span class="icon">🏅</span> Founding Member badge on your profile.</li>
+                  <li><span class="icon">🎁</span> Access to early city pilots and beta perks.</li>
+                  <li><span class="icon">💌</span> Priority updates on launch dates and features.</li>
+                  <li><span class="icon">🤝</span> Opportunity to join as an affiliate or collaborator.</li>
+                </ul>
+              </div>
+
+              <form
+                class="waitlist-form"
+                action="#"
+                method="post"
+                onsubmit="alert('This is a static preview. In a real setup, this would send your info to a waitlist service (e.g. Mailchimp, Airtable, Google Sheets).'); return false;"
+              >
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" placeholder="Your name" required />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                </div>
+                <div class="field">
+                  <label for="role">I’m joining as...</label>
+                  <select id="role" name="role">
+                    <option value="couple">A couple</option>
+                    <option value="family">A family</option>
+                    <option value="affiliate">Affiliate / business</option>
+                    <option value="investor">Investor / advisor</option>
+                    <option value="individual">Individual (curious)</option>
+                  </select>
+                </div>
+                <div class="waitlist-btn-row">
+                  <button type="submit" class="btn btn-primary">
+                    Join the Waitlist →
+                  </button>
+                  <span class="tiny-note">
+                    No spam. We’ll only email about pilots, launches & major updates.
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <div>© <span id="year"></span> PairPerks™ · Love More. Spend Less. Earn More.</div>
+        <div class="footer-links">
+          <span class="footer-link">Instagram</span>
+          <span class="footer-link">TikTok</span>
+          <span class="footer-link">X</span>
+          <span class="footer-link">Contact</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
