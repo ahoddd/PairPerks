@@ -1059,115 +1059,190 @@
         </div>
       </section>
 
-      <!-- WAITLIST -->
-      <section id="waitlist" class="waitlist">
-        <div class="shell">
-          <div class="waitlist-inner">
-            <div class="waitlist-content">
-              <div>
-                <div class="waitlist-title">Join the first wave of PairPerks.</div>
-                <p class="waitlist-sub">
-                  Founding members will help shape the product, test features early, and unlock
-                  unique badges and perks that won’t be available later.
-                </p>
-                <ul class="waitlist-points">
-                  <li><span class="icon">🏅</span> Founding Member badge on your profile.</li>
-                  <li><span class="icon">🎁</span> Access to early city pilots and beta perks.</li>
-                  <li><span class="icon">💌</span> Priority updates on launch dates and features.</li>
-                  <li><span class="icon">🤝</span> Opportunity to join as an affiliate or collaborator.</li>
-                </ul>
-              </div>
+<!-- WAITLIST -->
+<section id="waitlist" class="waitlist">
+  <style>
+    /* MAIN ANIMATION PACK D */
 
-      <style>
-  /* Smooth fade-in animation */
-  @keyframes fadeInScale {
-    0% {
+    /* Fade + slide-in */
+    @keyframes ppReveal {
+      0% { opacity: 0; transform: translateY(18px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Floating particles */
+    @keyframes floatUp {
+      0% { transform: translateY(20px) scale(0.8); opacity: 0; }
+      100% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+    }
+
+    /* Neon breathing border */
+    @keyframes neonPulse {
+      0% { box-shadow: 0 0 14px #3b82f6, 0 0 28px #ec4899; }
+      50% { box-shadow: 0 0 26px #ec4899, 0 0 42px #3b82f6; }
+      100% { box-shadow: 0 0 14px #3b82f6, 0 0 28px #ec4899; }
+    }
+
+    /* Shimmer loading */
+    @keyframes shimmer {
+      0% { background-position: -450px 0; }
+      100% { background-position: 450px 0; }
+    }
+
+    /* Confetti pop */
+    @keyframes confettiPop {
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+
+    .waitlist-d-container {
+      position: relative;
+      z-index: 1;
+      animation: ppReveal 0.9s ease-out forwards;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 22px;
+    }
+
+    /* PARTICLES BG */
+    .pp-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .pp-particle {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.9), rgba(59,130,246,0));
+      animation: floatUp 6s linear infinite;
+      opacity: 0.6;
+      filter: blur(4px);
+    }
+    .pp-particle:nth-child(1) { left: 15%; animation-duration: 7s; }
+    .pp-particle:nth-child(2) { left: 40%; animation-duration: 8s; animation-delay: 1s; }
+    .pp-particle:nth-child(3) { left: 70%; animation-duration: 6s; animation-delay: 2s; }
+    .pp-particle:nth-child(4) { left: 85%; animation-duration: 9s; animation-delay: 3s; }
+
+    /* FORM CONTAINER */
+    .pp-form-shell {
+      position: relative;
+      z-index: 10;
+      border-radius: 24px;
+      overflow: hidden;
+      animation: ppReveal 1.1s ease-out forwards;
+      background: rgba(15,23,42,0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(59,130,246,0.4);
+      box-shadow:
+        0 0 22px rgba(59,130,246,0.4),
+        0 0 40px rgba(236,72,153,0.35);
+      animation: neonPulse 4s infinite ease-in-out;
+    }
+
+    /* SHIMMER before form loads */
+    .pp-loading {
+      height: 900px;
+      border-radius: 20px;
+      background: linear-gradient(
+        to right,
+        #1e293b 0%,
+        #0f172a 20%,
+        #1e293b 40%,
+        #0f172a 100%
+      );
+      background-size: 800px 100%;
+      animation: shimmer 1.8s infinite linear;
+    }
+
+    /* Iframe itself */
+    .pp-iframe {
+      display: none;
+      width: 100%;
+      height: 1400px;
+      border: 0;
+      border-radius: 24px;
+    }
+
+    /* CONFETTI */
+    .pp-confetti {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
       opacity: 0;
-      transform: scale(0.94);
+      animation: confettiPop 0.8s ease-out;
+      pointer-events: none;
     }
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+  </style>
 
-  /* Loading shimmer animation */
-  @keyframes shimmer {
-    0% { background-position: -450px 0 }
-    100% { background-position: 450px 0 }
-  }
+  <div class="shell">
+    <div class="waitlist-inner">
+      <div class="pp-particles">
+        <div class="pp-particle"></div>
+        <div class="pp-particle"></div>
+        <div class="pp-particle"></div>
+        <div class="pp-particle"></div>
+      </div>
 
-  .form-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    position: relative;
-  }
+      <div class="waitlist-d-container">
 
-  .form-container {
-    width: 100%;
-    max-width: 650px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: rgba(15, 23, 42, 0.7);
-    box-shadow: 0 0 35px rgba(59,130,246,0.35),
-                0 0 60px rgba(236,72,153,0.25);
-    border: 1px solid rgba(59,130,246,0.35);
-    backdrop-filter: blur(16px);
-    animation: fadeInScale 0.8s ease-out forwards;
-  }
-
-  /* Shimmer placeholder while loading */
-  .form-loading {
-    height: 900px;
-    border-radius: 20px;
-    background: linear-gradient(
-      to right,
-      #1e293b 0%,
-      #0f172a 20%,
-      #1e293b 40%,
-      #0f172a 100%
-    );
-    background-size: 800px 100%;
-    animation: shimmer 1.8s infinite linear;
-  }
-</style>
-
-<div class="form-wrapper">
-  <div class="form-container" id="formContainer">
-    <div class="form-loading" id="formLoading"></div>
-
-    <iframe
-      id="formIframe"
-      src="https://docs.google.com/forms/d/e/1FAIpQLSfVmH5AZg-r_tUvjYZB7HsB4NAozugqPL0it_EqaxHt3KxaHA/viewform?embedded=true"
-      width="100%"
-      height="1400"
-      frameborder="0"
-      marginheight="0"
-      marginwidth="0"
-      style="display:none; border:0; border-radius: 20px;"
-    >
-    </iframe>
-  </div>
-</div>
-
-<script>
-  // Reveal the form + hide the shimmer after it loads
-  const iframe = document.getElementById("formIframe");
-  const loading = document.getElementById("formLoading");
-
-  iframe.onload = function () {
-    loading.style.display = "none";
-    iframe.style.display = "block";
-  };
-</script>
-
-
-            </div>
-          </div>
+        <!-- LEFT TEXT -->
+        <div>
+          <div class="waitlist-title">Join the first wave of PairPerks.</div>
+          <p class="waitlist-sub">
+            Founding members get exclusive perks, lifetime recognition badges,
+            and early access to Pilot Cities.
+          </p>
+          <ul class="waitlist-points">
+            <li><span class="icon">🏅</span> Founding Member Badge</li>
+            <li><span class="icon">🎟</span> Early Pilot Access</li>
+            <li><span class="icon">💌</span> First to test new features</li>
+            <li><span class="icon">🤝</span> Invite-only partner perks</li>
+          </ul>
         </div>
-      </section>
+
+        <!-- RIGHT: FORM + ANIMATION -->
+        <div class="pp-form-shell" id="ppFormShell">
+          <div class="pp-loading" id="ppLoading"></div>
+
+          <iframe
+            class="pp-iframe"
+            id="ppIframe"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfVmH5AZg-r_tUvjYZB7HsB4NAozugqPL0it_EqaxHt3KxaHA/viewform?embedded=true"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Loading → reveal iframe */
+    const formIframe = document.getElementById("ppIframe");
+    const loader = document.getElementById("ppLoading");
+
+    formIframe.onload = function () {
+      loader.style.display = "none";
+      formIframe.style.display = "block";
+
+      // FIRE CONFETTI
+      for (let i = 0; i < 14; i++) {
+        let c = document.createElement("div");
+        c.className = "pp-confetti";
+        c.style.background = ["#3b82f6","#ec4899","#fbbf24","#22c55e"][Math.floor(Math.random()*4)];
+        c.style.left = (Math.random()*90+5)+"%";
+        c.style.top = (Math.random()*40+20)+"%";
+        formIframe.parentElement.appendChild(c);
+        setTimeout(()=>c.remove(), 900);
+      }
+    };
+  </script>
+</section>
+
     </main>
 
     <footer>
@@ -1188,5 +1263,6 @@
   </script>
 </body>
 </html>
+
 
 
