@@ -1,256 +1,1095 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PairPerks — Rewards for Couples, Families & Local Businesses</title>
+  <meta charset="UTF-8" />
+  <title>PairPerks • Couples, Families, PPX & Local Perks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-elevated: #020617;
+      --bg-card: #020617;
+      --accent-gold: #fbbf24;
+      --accent-gold-soft: rgba(251,191,36,0.13);
+      --accent-blue: #0f172a;
+      --accent-blue-soft: rgba(15,23,42,0.9);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 24px 60px rgba(0,0,0,0.9);
+      --shadow-card: 0 18px 40px rgba(0,0,0,0.75);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease;
+      --max-width: 1120px;
+    }
 
-<style>
+    * { box-sizing: border-box; }
+
     body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #0d1a33;
-        color: #fff;
-        overflow-x: hidden;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #111827 0, #020617 45%, #000 90%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
     }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER / NAV */
     header {
-        text-align: center;
-        padding: 40px 20px 20px;
-    }
-    header img {
-        width: 140px;
-        filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
-    }
-    header h1 {
-        font-size: 40px;
-        background: linear-gradient(90deg, #ffd700, #e6b800);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 10px;
-    }
-    header p {
-        opacity: 0.85;
-        font-size: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.98), rgba(2,6,23,0.82));
+      border-bottom: 1px solid rgba(15,23,42,0.95);
     }
 
-    .section {
-        padding: 60px 20px;
-        max-width: 1100px;
-        margin: auto;
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 16px;
     }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(251,191,36,0.85);
+      border: 1px solid rgba(251,191,36,0.7);
+      background: radial-gradient(circle at 30% 0%, #facc15, #854d0e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-text-main {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      color: #fefce8;
+      background: rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.65);
+      background: rgba(15,23,42,0.95);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pill span.value {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      font-size: 12px;
+      padding: 7px 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      background: rgba(15,23,42,1);
+      color: var(--text-main);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #fbbf24, #facc15);
+      color: #111827;
+      box-shadow: 0 18px 40px rgba(234,179,8,0.8);
+      font-weight: 600;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(148,163,184,0.7);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 22px 50px rgba(234,179,8,0.95);
+      background: linear-gradient(to right, #facc15, #fbbf24);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 32px 0 40px;
+      border-top: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .section-header {
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
     .section-title {
-        font-size: 32px;
-        margin-bottom: 20px;
-        text-align: center;
-        background: linear-gradient(90deg, #ffd700, #ffcc33);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 620px;
     }
+
+    /* HERO */
+    .hero {
+      padding: 32px 0 40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 5vw, 40px);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #fbbf24, #facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 480px;
+    }
+
+    .hero-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .hero-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      font-size: 10px;
+      padding: 3px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* HERO RIGHT – DASH PREVIEW */
+    .hero-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31,41,55,1);
+      background: radial-gradient(circle at top left,#020617,#020617 40%,#050b18 100%);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 200deg,
+        rgba(251,191,36,0.26),
+        transparent,
+        rgba(251,191,36,0.4),
+        transparent
+      );
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill-status {
+      font-size: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.96);
+      padding: 3px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill-status span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .hero-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mini-tile {
+      border-radius: 12px;
+      border: 1px solid rgba(31,41,55,1);
+      background: rgba(15,23,42,0.96);
+      padding: 7px 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .mini-tile strong {
+      display: block;
+      font-size: 11px;
+      color: #fbbf24;
+      margin-bottom: 2px;
+    }
+
+    .xp-bar {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      border: 1px solid rgba(55,65,81,0.7);
+      margin-top: 6px;
+    }
+
+    .xp-fill {
+      height: 100%;
+      width: 68%;
+      border-radius: inherit;
+      background: linear-gradient(to right,#fbbf24,#22c55e);
+      box-shadow: 0 0 16px rgba(251,191,36,0.7);
+    }
+
+    /* GENERIC CARDS / GRIDS */
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
     .card {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,215,0,0.25);
-        border-radius: 14px;
-        padding: 25px;
-        backdrop-filter: blur(6px);
-        transition: 0.3s;
-    }
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 20px rgba(255,215,0,0.2);
-    }
-    .card h3 {
-        color: #ffd700;
-        font-size: 22px;
-        margin-top: 0;
-    }
-    .card p {
-        opacity: 0.85;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31,41,55,1);
+      background: radial-gradient(circle at top left,#020617,#050b18 70%,#020617);
+      padding: 14px;
+      box-shadow: var(--shadow-card);
     }
 
-    /* PPX banner */
+    .card-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .card-list li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .card-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--accent-gold);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 10px;
+      padding: 2px 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(15,23,42,0.9);
+      color: var(--text-muted);
+    }
+
+    .tag.gold {
+      border-color: rgba(234,179,8,0.9);
+      color: #facc15;
+    }
+
+    .tag.green {
+      border-color: rgba(34,197,94,0.9);
+      color: #bbf7d0;
+    }
+
+    .tag.blue {
+      border-color: rgba(59,130,246,0.9);
+      color: #bfdbfe;
+    }
+
+    .muted { color: var(--text-muted); font-size: 11px; }
+
+    /* PPX SECTION */
     .ppx-banner {
-        background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
-        border: 1px solid rgba(255,215,0,0.25);
-        border-radius: 16px;
-        padding: 40px;
-        text-align: center;
-        box-shadow: 0 0 20px rgba(255,215,0,0.15);
-        margin-top: 40px;
-    }
-    .ppx-banner h2 {
-        background: linear-gradient(90deg, #ffd700, #ffcc33);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 30px;
+      border-radius: 26px;
+      border: 1px solid rgba(251,191,36,0.45);
+      background: radial-gradient(circle at top,#111827,#020617 40%,#050b18 100%);
+      box-shadow: 0 26px 60px rgba(0,0,0,0.95);
+      padding: 18px 16px 20px;
+      position: relative;
+      overflow: hidden;
     }
 
+    .ppx-banner::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 210deg,
+        rgba(251,191,36,0.5),
+        transparent,
+        rgba(251,191,36,0.4),
+        transparent
+      );
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .ppx-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 2.3fr) minmax(0, 2.3fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .ppx-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      background: linear-gradient(to right,#fbbf24,#facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .ppx-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .ppx-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .ppx-tile {
+      border-radius: 14px;
+      border: 1px solid rgba(31,41,55,1);
+      background: rgba(15,23,42,0.97);
+      padding: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .ppx-tile strong {
+      display: block;
+      color: #fbbf24;
+      margin-bottom: 4px;
+    }
+
+    .ppx-logo-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(251,191,36,0.5);
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      width: fit-content;
+    }
+
+    .ppx-logo-chip-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(251,191,36,0.7);
+      box-shadow: 0 0 15px rgba(251,191,36,0.8);
+      background: radial-gradient(circle at 30% 0%, #facc15, #854d0e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ppx-logo-chip-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* HOW IT WORKS */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .step {
+      border-radius: 16px;
+      border: 1px solid rgba(31,41,55,1);
+      background: rgba(15,23,42,0.96);
+      padding: 12px 12px 11px;
+      font-size: 11px;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-card);
+    }
+
+    .step-number {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(251,191,36,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fbbf24;
+      margin-bottom: 4px;
+    }
+
+    /* FOOTER */
     footer {
-        text-align: center;
-        padding: 20px;
-        opacity: 0.6;
-        margin-top: 40px;
+      border-top: 1px solid rgba(15,23,42,0.9);
+      padding: 14px 16px 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
     }
-</style>
 
+    /* RESPONSIVE */
+    @media (max-width: 880px) {
+      .hero-inner { grid-template-columns: minmax(0,1fr); }
+      .ppx-inner { grid-template-columns: minmax(0,1fr); }
+    }
+
+    @media (max-width: 620px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav { justify-content: flex-start; }
+      section { padding: 26px 0 32px; }
+      .hero { padding-top: 22px; }
+      .hero-title { font-size: 28px; }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <img src="ppx-logo.png" alt="PairPerks Logo" />
-    <h1>PairPerks</h1>
-    <p>The Ultimate Rewards Ecosystem for Couples, Families & Local Businesses</p>
-</header>
-
-
-<!-- ======================================================
-     HERO OVERVIEW
-====================================================== -->
-<section class="section">
-    <h2 class="section-title">A New Kind of Rewards Platform</h2>
-    <p style="text-align:center; max-width:850px; margin:auto; opacity:0.9;">
-        PairPerks connects real people with local businesses through perks, challenges, 
-        shared goals, polls, loyalty tiers, reviews, and our PPX utility token.
-        Everything in one beautiful, user-friendly platform.
-    </p>
-</section>
-
-
-<!-- ======================================================
-     MAIN PROGRAM CARDS
-====================================================== -->
-<section class="section">
-    <h2 class="section-title">Explore the PairPerks Ecosystem</h2>
-
-    <div class="card-grid">
-
-        <div class="card">
-            <h3>💑 CoupleSphere</h3>
-            <p>Everything for couples — shared goals, challenges, date-night perks, bond-building tools & more.</p>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      <div class="shell header-inner">
+        <div class="brand">
+          <div class="brand-logo-img">
+            <!-- use your gold PairPerks x PPX coin here -->
+            <img src="pairperks-ppx-logo.png" alt="PairPerks x PPX Logo">
+          </div>
+          <div>
+            <div class="brand-text-main">PairPerks</div>
+            <div class="brand-text-sub">Couples • Families • Local Perks • PPX Utility</div>
+          </div>
         </div>
+        <nav>
+          <span class="nav-link" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">Programs</span>
+          <span class="nav-link" onclick="document.getElementById('ppx').scrollIntoView({behavior:'smooth'})">PPX Utility</span>
+          <span class="nav-link" onclick="document.getElementById('perkpolls').scrollIntoView({behavior:'smooth'})">PerkPolls</span>
+          <span class="nav-link" onclick="document.getElementById('affiliates').scrollIntoView({behavior:'smooth'})">For Affiliates</span>
+          <span class="nav-link" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How It Works</span>
 
-        <div class="card">
-            <h3>👨‍👩‍👧 FamilySphere</h3>
-            <p>Family milestones, chore trackers, family challenges, local deals, and kids reward programs.</p>
+          <div class="pill">
+            Live Mode: <span class="value">Private Pilot</span>
+          </div>
+          <button class="btn btn-outline" onclick="location.href='landing.html#waitlist'">
+            View Landing Page
+          </button>
+          <button class="btn btn-primary" onclick="location.href='landing.html#waitlist'">
+            Join Early Access →
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div class="shell hero-inner">
+          <div>
+            <div class="hero-eyebrow">PairPerks dashboard preview</div>
+            <h1 class="hero-title">
+              <span class="hero-highlight">Live rewards</span> for couples, families & local favorites.
+            </h1>
+            <p class="hero-sub">
+              This is a product-side preview of PairPerks — what members and affiliates
+              see when they’re inside the platform. The landing page you show people first
+              is <strong>landing.html</strong>; this page is your actual app home.
+            </p>
+            <div class="hero-badges-row">
+              <div class="hero-badge">💑 CoupleSphere</div>
+              <div class="hero-badge">👨‍👩‍👧 FamiSphere</div>
+              <div class="hero-badge">🎯 PerkPolls</div>
+              <div class="hero-badge">⭐ Reviews & Referrals</div>
+              <div class="hero-badge">💰 PPX Utility</div>
+            </div>
+            <div class="hero-cta-row">
+              <button class="btn btn-primary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">
+                See How It Works
+              </button>
+              <button class="btn btn-outline" onclick="document.getElementById('ppx').scrollIntoView({behavior:'smooth'})">
+                View PPX Utility →
+              </button>
+            </div>
+            <div class="hero-footnote">
+              🔐 This version is local / pilot only. When you’re ready, you’ll plug in backend + mobile apps.
+            </div>
+          </div>
+
+          <!-- Right: mini dashboard preview -->
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="pill-status">
+                <span class="dot"></span> Demo Profile · CoupleSphere & FamiSphere linked
+              </div>
+              <div class="hero-card-title">Tonight at a glance</div>
+              <div class="hero-card-sub">
+                Your pair has active perks, PPX earning opportunities, and nearby partner venues.
+              </div>
+
+              <div class="hero-mini-grid">
+                <div class="mini-tile">
+                  <strong>PairScore™</strong>
+                  Level 3 · 2 active streaks<br>
+                  + Weekend XP multiplier
+                  <div class="xp-bar"><div class="xp-fill"></div></div>
+                </div>
+                <div class="mini-tile">
+                  <strong>FamiScore™</strong>
+                  Family quests unlocked:<br>
+                  Zoo Day · Arcade Run · Park Picnic
+                </div>
+                <div class="mini-tile">
+                  <strong>PPX Wallet</strong>
+                  1,200 PPX · 3 new ways to earn today.
+                </div>
+                <div class="mini-tile">
+                  <strong>Nearby Perks</strong>
+                  5 partners within 10 miles with boosted rewards tonight.
+                </div>
+              </div>
+
+              <div class="hero-card-sub" style="margin-top:8px;">
+                ✅ Next actions:
+                - Check in at one partner location  
+                - Answer 1 PerkPoll  
+                - Leave 1 review  
+                → Earn up to <strong>250 PPX</strong> in under an hour.
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="card">
-            <h3>🎯 PerkPolls</h3>
-            <p>Affiliates run polls. Users vote. Businesses reward participation. Real engagement, real rewards.</p>
-        </div>
+      <!-- PROGRAMS -->
+      <section id="programs">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Programs</div>
+            <h2 class="section-title">Everything PairPerks offers inside the app.</h2>
+            <p class="section-sub">
+              The landing page sells the idea. This dashboard page shows how it actually runs day-to-day.
+            </p>
+          </div>
 
-        <div class="card">
-            <h3>⭐ Review Rewards</h3>
-            <p>Users earn perks for verified reviews after scanning a partner’s QR code at checkout.</p>
-        </div>
-
-        <div class="card">
-            <h3>📣 Experience Sharing</h3>
-            <p>Users share their visit with 5 contacts and instantly earn bonus perks.</p>
-        </div>
-
-        <div class="card">
-            <h3>📍 Local Perks Map</h3>
-            <p>Interactive map showing affiliate locations, perks, and real-time traffic trends.</p>
-        </div>
-
-        <div class="card">
-            <h3>🏆 Loyalty Tiers</h3>
-            <p>Earn status levels that unlock powerful exclusive perks and VIP benefits across all partners.</p>
-        </div>
-
-        <div class="card">
-            <h3>🛍️ Perk Marketplace</h3>
-            <p>Redeem perks, bundles, VIP experiences & seasonal offers directly inside the ecosystem.</p>
-        </div>
-
-        <div class="card">
-            <h3>💼 Affiliate Dashboard</h3>
-            <p>Businesses get analytics, poll insights, foot traffic data, review stats & much more.</p>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ======================================================
-     PPX TOKEN SECTION
-====================================================== -->
-<section class="section">
-    <div class="ppx-banner">
-        <h2>PPX — The Digital Utility Token of PairPerks</h2>
-        <p style="opacity:0.85;">
-            Earn PPX by completing challenges, reviewing affiliates, checking in, voting on polls,
-            scanning partner QR codes, and sharing experiences.  
-            Spend PPX on perks, upgrades, VIP access & future subscription discounts.
-            Blockchain-ready when you're ready.
-        </p>
-
-        <div class="card-grid" style="margin-top:30px;">
+          <div class="columns">
             <div class="card">
-                <h3>💰 Earn PPX Easily</h3>
-                <p>Check-ins, QR scans, challenges, polls, and referrals all generate PPX.</p>
+              <div class="card-label">CoupleSphere™</div>
+              <div class="card-title">The home base for couples.</div>
+              <p class="card-sub">
+                Shared rewards tied to real-world outings, challenges and goals.
+              </p>
+              <ul class="card-list">
+                <li>Shared couple profile with vibes (chill, travel, nightlife, family-focused, etc.).</li>
+                <li>XP for check-ins, QR scans, PerkPolls and reviews done together.</li>
+                <li>Badges for streaks, trips, and “firsts” (first resort, first cruise, etc.).</li>
+                <li>Optional discovery mode to see other verified couples (future toggle).</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag blue">💑 CoupleSphere™</span>
+                <span class="tag green">⭐ PairScore™</span>
+                <span class="tag gold">🏅 Badges</span>
+              </div>
             </div>
 
             <div class="card">
-                <h3>🎁 Spend PPX</h3>
-                <p>Redeem for perks, bundles, upgrades, boosts, VIP tiers & more.</p>
+              <div class="card-label">FamiSphere™</div>
+              <div class="card-title">Family-wide quests & perks.</div>
+              <p class="card-sub">
+                A shared hub for parents + kids, packed with family quests and savings.
+              </p>
+              <ul class="card-list">
+                <li>Family profile with parents + kids plus optional teen logins.</li>
+                <li>Quests tied to parks, zoos, arcades, resorts and more.</li>
+                <li>Parents approve connections and visibility. Teen mode = future toggle.</li>
+                <li>Earn FamiScore™ by doing things together, not just spending money.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag green">👪 FamiSphere™</span>
+                <span class="tag blue">🧭 Family quests</span>
+                <span class="tag gold">🎁 Seasonal runs</span>
+              </div>
             </div>
 
             <div class="card">
-                <h3>🛡️ Secure Utility</h3>
-                <p>PPX starts as a closed-loop digital utility token until you're ready for blockchain launch.</p>
+              <div class="card-label">Partner Console</div>
+              <div class="card-title">For affiliates & venues.</div>
+              <p class="card-sub">
+                Dashboard for restaurants, resorts, arcades, hotels and more.
+              </p>
+              <ul class="card-list">
+                <li>Create perks that trigger when a couple/family scans a QR code.</li>
+                <li>Run PerkPolls and see what locals would actually book.</li>
+                <li>Track visits, reviews, PPX earnings, and referral share counts.</li>
+                <li>Future options for sponsored placements & boosted campaigns.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag gold">🏢 Partner Console</span>
+                <span class="tag blue">📊 Insights</span>
+                <span class="tag green">🚀 Boosted perks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERKPOLLS / REVIEWS / SHARING -->
+      <section id="perkpolls">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Engagement Engine</div>
+            <h2 class="section-title">PerkPolls, reviews & referrals — the flywheel.</h2>
+            <p class="section-sub">
+              These 3 mechanics are where engagement turns into real PPX value and real traffic for affiliates.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">PerkPolls™</div>
+              <div class="card-title">“What would make you actually show up?”</div>
+              <p class="card-sub">
+                Affiliates run polls in their PairPerks profile. Members vote, earn rewards, and shape future perks.
+              </p>
+              <ul class="card-list">
+                <li>Polls like “Free dessert vs. buy-1-get-1 arcade credits vs. late checkout?”.</li>
+                <li>Users vote; top options become live perks for a limited time.</li>
+                <li>Voters get bonus PPX when they redeem a poll-driven perk.</li>
+                <li>Affiliates see what actually converts, not just likes.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag blue">🎯 PerkPolls</span>
+                <span class="tag green">📊 Demand data</span>
+              </div>
             </div>
 
             <div class="card">
-                <h3>🚀 Future-Ready</h3>
-                <p>Tokenomics, architecture & branding are fully prepared for expansion.</p>
+              <div class="card-label">Reviews & Ratings</div>
+              <div class="card-title">Verified reviews with perks.</div>
+              <p class="card-sub">
+                After scanning a partner’s QR code, customers get a prompt to leave a review.
+                Partners can unlock perks for real reviews.
+              </p>
+              <ul class="card-list">
+                <li>Reviews tied to a verified visit (QR or check-in).</li>
+                <li>Affiliates can reward honest feedback with perks or PPX multipliers.</li>
+                <li>High-quality reviews improve placement in discovery lists.</li>
+                <li>Users earn additional PairScore / FamiScore XP for constructive feedback.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag gold">⭐ Review rewards</span>
+                <span class="tag blue">🛡 Verified visits</span>
+              </div>
             </div>
+
+            <div class="card">
+              <div class="card-label">Experience Sharing</div>
+              <div class="card-title">“Share with 5 contacts” perk.</div>
+              <p class="card-sub">
+                After a visit, users can share their experience link with up to 5 contacts for extra rewards.
+              </p>
+              <ul class="card-list">
+                <li>Unique PairPerks link shows the partner, the perk used and photos (later).</li>
+                <li>Each open or signup can unlock PPX boosts or special perks.</li>
+                <li>Partners get organic, trackable word-of-mouth exposure.</li>
+                <li>You can show affiliates exactly how many visits came from sharing.</li>
+              </ul>
+              <div class="tag-row">
+                <span class="tag green">📣 Viral loop</span>
+                <span class="tag blue">🔗 Trackable</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </section>
 
+      <!-- PPX UTILITY -->
+      <section id="ppx">
+        <div class="shell">
+          <div class="ppx-banner">
+            <div class="ppx-inner">
+              <div>
+                <div class="ppx-logo-chip">
+                  <div class="ppx-logo-chip-circle">
+                    <img src="pairperks-ppx-logo.png" alt="PPX Coin">
+                  </div>
+                  PairPerks x PPX Utility · Closed-loop until you’re ready for full crypto launch.
+                </div>
+                <div class="ppx-title">PPX — Your Unified Utility Layer</div>
+                <p class="ppx-sub">
+                  PPX is the digital token that tracks value across all PairPerks activity. At first, it’s a
+                  private utility currency inside your system. Later, when the business is big enough and fees
+                  make sense, it can become a fully on-chain token.
+                </p>
 
-<!-- ======================================================
-     AFFILIATE SECTION
-====================================================== -->
-<section class="section">
-    <h2 class="section-title">For Local Businesses</h2>
-    <div class="card-grid">
+                <div class="ppx-grid">
+                  <div class="ppx-tile">
+                    <strong>💰 Ways to earn PPX</strong>
+                    Check-ins, QR scans, PerkPoll votes, completed challenges, reviews, referrals,
+                    streak milestones, and seasonal quests.
+                  </div>
+                  <div class="ppx-tile">
+                    <strong>🎁 Ways to spend PPX</strong>
+                    Perk discounts, VIP tiers, priority bookings, surprise drops, boosts in raffles, and
+                    access to “PPX-only” experiences.
+                  </div>
+                  <div class="ppx-tile">
+                    <strong>🧠 Smart tokenomics</strong>
+                    You control issuance in the backend. You can cap supply, slow down earning, and
+                    introduce sinks (PPX burn for big perks) as needed.
+                  </div>
+                  <div class="ppx-tile">
+                    <strong>🚀 Future blockchain-ready</strong>
+                    When the time is right, the PPX balances you’ve tracked can map to an on-chain
+                    deployment, with proper audits and legal review.
+                  </div>
+                </div>
+              </div>
 
-        <div class="card">
-            <h3>📈 Increased Foot Traffic</h3>
-            <p>Your business becomes part of an active local ecosystem that drives new customers weekly.</p>
+              <div>
+                <div class="section-kicker">PPX in action</div>
+                <h3 class="section-title" style="font-size:17px;">Example night out for one couple:</h3>
+                <p class="ppx-sub">
+                  This is how a single night can drive value for users, affiliates and PPX.
+                </p>
+
+                <ul class="card-list" style="font-size:11px;">
+                  <li>They see a PerkPoll from a local partner and vote for “Free appetizer for PPX members”.</li>
+                  <li>Poll wins → perk goes live. Couple books and checks in via PairPerks.</li>
+                  <li>They scan the affiliate QR at the end of the visit and leave a review.</li>
+                  <li>They share their experience with 5 contacts and 2 sign up for the waitlist.</li>
+                  <li>Couple earns PPX from: poll vote, check-in, QR scan, review + shares.</li>
+                  <li>Partner gets: guaranteed visit, real reviews, word-of-mouth and analytics.</li>
+                </ul>
+
+                <p class="ppx-sub" style="margin-top:8px;">
+                  All of that is trackable inside your future backend + admin tools. Right now, this
+                  page is your visual blueprint for those flows.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="card">
-            <h3>📊 Real Analytics</h3>
-            <p>Track scans, visits, reviews, poll engagement & customer loyalty.</p>
+      <!-- FOR AFFILIATES -->
+      <section id="affiliates">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">For partners</div>
+            <h2 class="section-title">Why a business would say “yes” to PairPerks.</h2>
+            <p class="section-sub">
+              This is basically what you’ll tell Kalahari, local restaurants, arcades,
+              jewelers, etc. It can mirror your pitch deck.
+            </p>
+          </div>
+
+          <div class="columns">
+            <div class="card">
+              <div class="card-label">Traffic & spend</div>
+              <div class="card-title">You bring them qualified groups, not random clicks.</div>
+              <p class="card-sub">
+                PairPerks is only for couples, families and groups that actually show up in real life.
+              </p>
+              <ul class="card-list">
+                <li>Customers arrive “pre-warmed” via perks and PPX earning opportunities.</li>
+                <li>Partnership is opt-in and revocable; they keep full control.</li>
+                <li>You can show them how many scans / visits came from PairPerks, not guesswork.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Zero-risk start</div>
+              <div class="card-title">Pilot first, pay later.</div>
+              <p class="card-sub">
+                Your plan can be: free pilot → performance-based tiers once you prove value.
+              </p>
+              <ul class="card-list">
+                <li>No expensive setup; you generate their QR codes and perks.</li>
+                <li>Fees tied to real visits or subscriptions, not hope.</li>
+                <li>You can cap how many redemptions they allow during pilot.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-label">Tools they don’t have</div>
+              <div class="card-title">PerkPolls, PPX, and review rewards.</div>
+              <p class="card-sub">
+                Instead of just offering a discount, they get a full engagement toolkit.
+              </p>
+              <ul class="card-list">
+                <li>Targeted perks for couples vs. families vs. groups.</li>
+                <li>Poll-based offers built from real customer preferences.</li>
+                <li>Review, referral and PPX systems baked in.</li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div class="card">
-            <h3>🔧 Custom Perks</h3>
-            <p>Create exclusive deals, time-based perks, VIP perks & seasonal offers.</p>
+      <!-- HOW IT WORKS -->
+      <section id="how-it-works">
+        <div class="shell">
+          <div class="section-header">
+            <div class="section-kicker">Flow</div>
+            <h2 class="section-title">How the whole system works (high level).</h2>
+            <p class="section-sub">
+              This is the simple explanation you can use with investors, partners and friends.
+            </p>
+          </div>
+
+          <h3 style="font-size:15px; margin-bottom:6px;">For couples & families</h3>
+          <div class="steps-row">
+            <div class="step">
+              <div class="step-number">1</div>
+              <strong>Create a PairPerks profile.</strong><br>
+              They choose CoupleSphere or FamiSphere, set their vibes and connect their partner / family.
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <strong>Find nearby perks.</strong><br>
+              Browse partners, PerkPolls, perks and PPX boosts on the map or in a feed.
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <strong>Go out & earn.</strong><br>
+              Check-in, scan, leave a review, share the experience, and watch PPX + scores grow.
+            </div>
+          </div>
+
+          <h3 style="font-size:15px; margin:18px 0 6px;">For affiliates / partners</h3>
+          <div class="steps-row">
+            <div class="step">
+              <div class="step-number">1</div>
+              <strong>Onboard with a simple form.</strong><br>
+              You collect their logo, basic offers, capacity limits and any pilot rules.
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <strong>Launch perks & PerkPolls.</strong><br>
+              You (or later their console) set perks, polls and QR codes. They start seeing visits.
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <strong>Review the numbers.</strong><br>
+              They see visits, reviews, shares and potential upsells → making the paid tiers
+              a no-brainer later.
+            </div>
+          </div>
+
+          <p class="muted" style="margin-top:14px;">
+            🔗 Want people to join? Your landing page with the Google Forms waitlist is still
+            <strong>landing.html</strong>. This <strong>index.html</strong> is the “inside the app”
+            view that shows the full vision.
+          </p>
         </div>
+      </section>
+    </main>
 
-        <div class="card">
-            <h3>📣 Free Promotion</h3>
-            <p>Customers share your offers with their contacts — completely free advertising.</p>
-        </div>
+    <footer>
+      © <span id="year"></span> PairPerks · Love More. Spend Less. Earn More. · PPX Utility (closed-loop pilot)
+    </footer>
+  </div>
 
-    </div>
-</section>
-
-
-<footer>
-    © 2025 PairPerks — All Rights Reserved.
-</footer>
-
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
