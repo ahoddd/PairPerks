@@ -1,968 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>PairPerks – Save More Together. Earn Real-World Rewards.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --bg-main: #020617;
-      --bg-card: #020617;
-      --accent-blue: #3b82f6;
-      --accent-pink: #ec4899;
-      --accent-gold: #fbbf24;
-      --accent-green: #22c55e;
-      --accent-purple: #a855f7;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-soft: #1f2937;
-      --radius-lg: 18px;
-      --radius-xl: 26px;
-      --shadow-soft: 0 24px 55px rgba(0,0,0,0.85);
-      --max-width: 1180px;
-      --transition: 0.2s ease-out;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PairPerks — Explore More. Spend Less. Earn Rewards.</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+    :root {
+        --navy: #020617;
+        --navy-soft: #0b1220;
+        --navy-mid: #111827;
+        --gold: #facc6b;
+        --gold-strong: #fbbf24;
+        --orange: #f97316;
+        --text-main: #f1f5f9;
+        --text-soft: #94a3b8;
+        --radius-lg: 18px;
+        --radius-md: 14px;
+        --shadow-strong: 0 20px 55px rgba(0,0,0,0.75);
+        --shadow-soft: 0 10px 35px rgba(0,0,0,0.45);
+        --max-width: 1100px;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, #111827 0, #020617 45%, #000 90%);
-      color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #020617, #000 70%);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
     }
+    a { color: var(--gold); text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    header {
+        padding: 16px 18px;
+        border-bottom: 1px solid rgba(15,23,42,0.9);
+        background: linear-gradient(to bottom, rgba(2,6,23,0.98), rgba(2,6,23,0.85));
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(14px);
     }
 
     .shell {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 16px;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 16px;
     }
 
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(20px);
-      background: linear-gradient(to bottom, rgba(2,6,23,0.96), rgba(2,6,23,0.78));
-      border-bottom: 1px solid rgba(15,23,42,0.9);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      gap: 12px;
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 
-    .brand-logo-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 22px rgba(251,191,36,0.65);
-      object-fit: contain;
-      background: radial-gradient(circle at top, #0b1220, #020617);
+    .brand img {
+        width: 42px;
+        height: 42px;
+        filter: drop-shadow(0 0 12px rgba(249,204,94,0.7));
     }
 
-    .brand-name {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .brand-title {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        color: var(--gold);
     }
 
-    .brand-sub {
-      font-size: 11px;
-      color: var(--text-muted);
+    nav a {
+        font-size: 13px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(148,163,184,0.35);
+        color: var(--text-soft);
+        margin-left: 8px;
+        transition: 0.2s ease;
+    }
+    nav a:hover {
+        color: var(--gold);
+        border-color: var(--gold);
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 12px;
-    }
-
-    .nav-link {
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    .nav-link:hover {
-      color: #e5e7eb;
-    }
-
-    .btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      padding: 7px 14px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      background: rgba(15,23,42,0.92);
-      color: var(--text-main);
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
-    }
-
-    .btn-primary {
-      background: linear-gradient(to right, #fbbf24, #3b82f6);
-      border-color: rgba(251,191,36,0.9);
-      color: #020617;
-      box-shadow: 0 18px 38px rgba(59,130,246,0.9);
-      font-weight: 600;
-    }
-
-    .btn-outline {
-      background: rgba(15,23,42,0.95);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.8);
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 22px 48px rgba(37,99,235,1);
-      background: linear-gradient(to right, #facc15, #2563eb);
-    }
-
-    /* HERO */
-    .hero {
-      padding: 30px 0 34px;
-      border-bottom: 1px solid rgba(15,23,42,0.9);
-    }
-
-    .hero-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 3.1fr) minmax(0, 2.4fr);
-      gap: 24px;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .hero-title {
-      font-size: clamp(30px, 4.8vw, 40px);
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 10px;
-    }
-
-    .hero-highlight {
-      background: linear-gradient(to right, #fbbf24, #3b82f6);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin-bottom: 14px;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .hero-tag {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.92);
-      font-size: 10px;
-      padding: 3px 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-muted);
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .hero-footnote {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-card {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(31,41,55,1);
-      background: radial-gradient(circle at top left,#020617,#020617 40%,#050b18 100%);
-      box-shadow: var(--shadow-soft);
-      padding: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(
-        from 210deg,
-        rgba(251,191,36,0.28),
-        rgba(59,130,246,0.2),
-        rgba(236,72,153,0.24),
-        transparent,
-        rgba(251,191,36,0.32)
-      );
-      opacity: 0.75;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .pill-status {
-      font-size: 10px;
-      border-radius: 999px;
-      padding: 3px 8px;
-      border: 1px solid rgba(148,163,184,0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(15,23,42,0.95);
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34,197,94,0.9);
-    }
-
-    .hero-card-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .hero-card-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .mini-card {
-      border-radius: 14px;
-      border: 1px solid rgba(31,41,55,1);
-      background: rgba(15,23,42,0.96);
-      padding: 8px;
-      font-size: 10px;
-    }
-
-    .mini-title {
-      font-weight: 600;
-      margin-bottom: 3px;
-      font-size: 11px;
-    }
-
-    .mini-metric {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .mini-metric span {
-      color: var(--accent-blue);
-      font-weight: 600;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      border-radius: 999px;
-      background: #020617;
-      border: 1px solid rgba(30,64,175,0.6);
-      overflow: hidden;
-      margin-top: 5px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 68%;
-      background: linear-gradient(to right, #22c55e, #3b82f6);
-      box-shadow: 0 0 16px rgba(59,130,246,0.95);
-    }
-
-    .hero-footer-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .chip {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      padding: 2px 6px;
-      font-size: 10px;
-      background: rgba(15,23,42,0.9);
-    }
-
-    /* SECTION BASE */
     section {
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(15,23,42,0.9);
+        padding: 60px 0;
     }
 
-    .section-header {
-      margin-bottom: 16px;
+    h1, h2, h3 {
+        margin: 0;
+        font-weight: 700;
     }
 
-    .section-kicker {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+    .grid {
+        display: grid;
+        gap: 28px;
     }
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
+    @media (min-width: 800px) {
+        .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
     }
 
-    .section-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      max-width: 560px;
+    /* Hero */
+    #hero {
+        text-align: center;
+        padding: 80px 0 90px;
     }
-
-    .columns {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+    #hero h1 {
+        font-size: 38px;
+        margin-bottom: 14px;
+        background: linear-gradient(90deg,var(--gold),var(--orange));
+        -webkit-background-clip: text;
+        color: transparent;
     }
+    #hero p {
+        color: var(--text-soft);
+        font-size: 15px;
+        max-width: 620px;
+        margin: 0 auto 22px;
+    }
+    .cta-btn {
+        padding: 10px 22px;
+        background: linear-gradient(90deg,var(--gold),var(--orange));
+        color: #111;
+        font-size: 14px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        box-shadow: 0 15px 40px rgba(252,211,77,0.35);
+        transition: 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); }
 
+    /* Feature Cards */
     .card {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(31,41,55,1);
-      background: radial-gradient(circle at top left,#020617,#050b18 70%,#020617);
-      padding: 14px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.85);
-      font-size: 11px;
+        padding: 22px;
+        background: radial-gradient(circle at top,#020617,#050817 65%,#000);
+        border: 1px solid rgba(31,41,55,1);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        font-size: 14px;
+        color: var(--text-soft);
+    }
+    .card h3 {
+        color: var(--gold);
+        font-size: 18px;
+        margin-bottom: 10px;
     }
 
-    .card-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 3px;
+    /* PPX Section */
+    .ppx-img {
+        width: 140px;
+        filter: drop-shadow(0 0 14px rgba(249,204,94,0.6));
+        margin-bottom: 14px;
     }
 
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
+    /* Activity List */
+    .activity-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(31,41,55,1);
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
     }
-
-    .card-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .card-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 11px;
-    }
-
-    .card-list li {
-      position: relative;
-      padding-left: 16px;
-      margin-bottom: 4px;
-    }
-
-    .card-list li::before {
-      content: "•";
-      position: absolute;
-      left: 4px;
-      color: var(--accent-blue);
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .tag {
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      font-size: 10px;
-      padding: 2px 7px;
-      background: rgba(15,23,42,0.96);
-      color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .tag.blue { border-color: rgba(59,130,246,0.85); color: #bfdbfe; }
-    .tag.green { border-color: rgba(34,197,94,0.9); color: #bbf7d0; }
-    .tag.pink { border-color: rgba(236,72,153,0.9); color: #f9a8d4; }
-    .tag.gold { border-color: rgba(234,179,8,0.95); color: #facc15; }
-    .tag.purple { border-color: rgba(168,85,247,0.9); color: #e9d5ff; }
-
-    /* FOOTER */
-    footer {
-      padding: 14px 16px 18px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-      align-items: center;
-      border-top: 1px solid rgba(15,23,42,0.9);
-      padding-top: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .footer-link {
-      cursor: pointer;
-    }
-
-    .footer-link:hover {
-      color: #e5e7eb;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 880px) {
-      .hero-inner {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .nav {
-        display: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-      .hero {
-        padding-top: 22px;
-      }
-      section {
-        padding: 24px 0;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <div class="shell header-inner">
+
+<!-- ============================
+            HEADER
+============================= -->
+<header>
+    <div class="shell flex">
         <div class="brand">
-          <img src="assets/pairperks-logo-gold-navy.png" alt="PairPerks Logo" class="brand-logo-img" />
-          <div>
-            <div class="brand-name">PAIRPERKS</div>
-            <div class="brand-sub">Love more. Spend less. Earn more.</div>
-          </div>
+            <img src="pairperks-logo.png" alt="PairPerks Logo">
+            <div class="brand-title">PairPerks</div>
         </div>
 
-        <nav class="nav">
-          <span class="nav-link" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How it works</span>
-          <span class="nav-link" onclick="document.getElementById('reviews').scrollIntoView({behavior:'smooth'})">Reviews</span>
-          <span class="nav-link" onclick="document.getElementById('perk-systems').scrollIntoView({behavior:'smooth'})">Game systems</span>
-          <span class="nav-link" onclick="document.getElementById('partners').scrollIntoView({behavior:'smooth'})">For partners</span>
-          <button class="btn btn-outline" onclick="window.location.href='landing.html'">
-            Join Waitlist
-          </button>
-          <button class="btn btn-primary" onclick="window.location.href='landing.html'">
-            Get Early Access →
-          </button>
+        <nav>
+            <a href="#ppx">PPX</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#sharing">Share & Earn</a>
+            <a href="ppx-tokenomics.html">Tokenomics</a>
+            <a href="landing.html">Waitlist</a>
         </nav>
-      </div>
-    </header>
+    </div>
+</header>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero" id="top">
-        <div class="shell hero-inner">
-          <div>
-            <div class="hero-kicker">Couples · Families · Real-world perks</div>
-            <h1 class="hero-title">
-              <span class="hero-highlight">PairPerks</span> turns date nights,
-              trips and family outings into a real-life rewards game.
-            </h1>
-            <p class="hero-sub">
-              Scan in, check out, leave reviews, complete challenges, share your wins,
-              and unlock secret perks that only work when you show up together.
-              Free for customers, powerful for partners, built to be addicting
-              in the healthiest way.
-            </p>
+<!-- ============================
+             HERO
+============================= -->
+<section id="hero">
+    <h1>Discover. Share. Earn Real Perks.</h1>
+    <p>PairPerks helps couples and families explore more of the world around them — 
+       and get rewarded every time they go out, check in, review, or share their experience.</p>
+    <button class="cta-btn" onclick="window.location='landing.html'">Join the Early Access Waitlist →</button>
+</section>
 
-            <div class="hero-tags">
-              <span class="hero-tag">💑 CoupleSphere & double dates</span>
-              <span class="hero-tag">👨‍👩‍👧 FamiSphere for families</span>
-              <span class="hero-tag">🧭 PerkPaths™ smart itineraries</span>
-              <span class="hero-tag">🎮 PairWars, QR hunts & riddles</span>
-              <span class="hero-tag">⭐ Review rewards & share boosts</span>
+<!-- ============================
+       CORE FEATURES
+============================= -->
+<section id="features">
+    <div class="shell">
+        <div class="grid grid-3">
+            <div class="card">
+                <h3>⭐ Visit Partners</h3>
+                Explore exclusive perks at local businesses. Just scan the QR when you visit.
             </div>
-
-            <div class="hero-cta-row">
-              <button class="btn btn-primary" onclick="window.location.href='landing.html'">
-                Join the First 1,000 Members
-              </button>
-              <button class="btn btn-outline" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">
-                Preview the Experience
-              </button>
+            <div class="card">
+                <h3>💬 Leave Reviews</h3>
+                Earn perks for leaving real post-visit reviews that help others.
             </div>
-
-            <div class="hero-footnote">
-              🏅 Founding members get lifetime badges, boosted XP, and early access to
-              new cities & features.
+            <div class="card">
+                <h3>📣 Share Experiences</h3>
+                Share your outing with 5 friends and earn bonuses & multiplier boosts.
             </div>
-          </div>
+        </div>
+    </div>
+</section>
 
-          <div class="hero-card">
-            <div class="hero-card-inner">
-              <div class="pill-status">
-                <span class="pill-dot"></span>
-                Live Concept Dashboard · Prototype View
-              </div>
-              <div class="hero-card-title">Tonight’s Sample “Perk Path”</div>
-              <div class="hero-card-sub">
-                What a real PairPerks night could look like for a couple or family using
-                smart routes, XP, reviews and share boosts.
-              </div>
+<!-- ============================
+         PPX REWARD SYSTEM
+============================= -->
+<section id="ppx">
+    <div class="shell">
 
-              <div class="hero-grid">
-                <div class="mini-card">
-                  <div class="mini-title">PerkPath™ Route</div>
-                  <div class="mini-metric">
-                    ➊ Arcade • ➋ Dinner • ➌ Ice cream
-                    <br />
-                    <span>Save 38% vs. normal prices</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                  </div>
+        <h2 style="text-align:center; font-size:26px; margin-bottom:16px;">
+            PPX — The Token Behind Every Reward
+        </h2>
+        <p style="text-align:center; color:var(--text-soft); max-width:650px; margin: 0 auto 30px;">
+            PPX is earned through check-ins, streaks, reviews, challenges, and sharing experiences.
+            This is not a meme coin — it’s a real utility token that powers the entire PairPerks ecosystem.
+        </p>
+
+        <div class="grid grid-2" style="margin-top:30px; align-items:center;">
+            <!-- Copy -->
+            <div>
+                <div class="card">
+                    <h3>How You Earn PPX</h3>
+                    <ul style="padding-left:18px; margin:0; font-size:13px;">
+                        <li>Verified check-ins at partner locations</li>
+                        <li>Leaving post-visit reviews</li>
+                        <li>Completing challenges</li>
+                        <li>Maintaining streaks</li>
+                        <li>Sharing experiences with friends</li>
+                    </ul>
                 </div>
 
-                <div class="mini-card">
-                  <div class="mini-title">Tonight’s XP Boosts</div>
-                  <div class="mini-metric">
-                    +2x XP for reviews<br />
-                    <span>+1.5x for shared posts</span>
-                  </div>
+                <div class="card" style="margin-top:18px;">
+                    <h3>Partner Utility</h3>
+                    Businesses can use PPX to boost their visibility, join seasonal campaigns,
+                    and access analytics on guest engagement.
+                </div>
+            </div>
+
+            <!-- Badge -->
+            <div style="text-align:center;">
+                <div style="
+                    background: radial-gradient(circle at top,#111827,#020617 60%,#000);
+                    padding:22px;
+                    border-radius: var(--radius-lg);
+                    border:1px solid rgba(249,204,94,0.25);
+                    box-shadow: var(--shadow-strong);
+                    display:inline-block;">
+                    <img src="ppx-badge.png" class="ppx-img" alt="PPX Badge">
+                    <div style="font-size:13px; color:var(--text-main); font-weight:600;">
+                        PairPerks × PPX
+                    </div>
+                    <div style="font-size:12px; color:var(--gold); margin-top:4px;">
+                        Real world value meets real world fun.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     PPX DASHBOARD PREVIEW
+============================= -->
+<section id="ppx-dashboard">
+    <div class="shell">
+
+        <h2 style="text-align:center; font-size:26px; margin-bottom:20px;">Your PPX Dashboard</h2>
+
+        <div style="
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:22px;
+            background:radial-gradient(circle at top left,#0b1220,#020617 70%);
+            border-radius: var(--radius-lg);
+            border:1px solid rgba(31,41,55,1);
+            padding:20px;
+            box-shadow: var(--shadow-strong);
+        ">
+
+            <!-- Left -->
+            <div style="border-right:1px solid rgba(31,41,55,1); padding-right:20px;">
+                <h3 style="margin-bottom:8px;">Balance</h3>
+                <div style="display:flex; align-items:center; gap:14px; margin-bottom:12px;">
+                    <img src="ppx-coin.png" style="width:46px;">
+                    <div>
+                        <div style="font-size:22px; font-weight:700;">18,420 PPX</div>
+                        <div style="font-size:11px; color:var(--text-soft);">Est rewards value: <span style="color:var(--gold);">$45–$80</span></div>
+                    </div>
                 </div>
 
-                <div class="mini-card">
-                  <div class="mini-title">Review Rewards</div>
-                  <div class="mini-metric">
-                    Leave 3 verified reviews →
-                    <span>free appetizer next visit</span>
-                  </div>
+                <div class="grid grid-3" style="gap:10px;">
+                    <div class="card">
+                        <strong>Streak:</strong> 12 days<br>
+                        <span style="color:#22c55e;">+18% bonus</span>
+                    </div>
+                    <div class="card">
+                        <strong>Tier:</strong> Gold<br>
+                        2 new perks unlocked
+                    </div>
+                    <div class="card">
+                        <strong>Upcoming:</strong> Waterpark<br>
+                        2× PPX weekend
+                    </div>
                 </div>
-
-                <div class="mini-card">
-                  <div class="mini-title">Live Perk Auctions</div>
-                  <div class="mini-metric">
-                    2 couples bidding XP for<br />
-                    <span>VIP bowling lane at 9pm</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="hero-footer-row">
-                <span class="chip">📍 GeoBoost™: +10% off within 0.5 miles</span>
-                <span class="chip">🛡 SafeMeet scoring built-in</span>
-                <span class="chip">🃏 PerkPoker & NumberGuess mini-games</span>
-              </div>
             </div>
-          </div>
+
+            <!-- Right -->
+            <div>
+                <h3>Recent Activity</h3>
+
+                <ul class="activity-list" style="list-style:none; padding:0; margin-top:10px;">
+                    <li><span>⭐ Review — Local BBQ</span><span style="color:var(--gold);">+120 PPX</span></li>
+                    <li><span>🎉 Check-in — Waterpark</span><span style="color:var(--gold);">+260 PPX</span></li>
+                    <li><span>🎮 Arcade Visit</span><span style="color:var(--gold);">+420 PPX</span></li>
+                    <li><span>📣 Shared with 5 friends</span><span style="color:var(--gold);">+300 PPX</span></li>
+                </ul>
+
+                <button class="cta-btn" style="margin-top:18px;">View Full Dashboard →</button>
+            </div>
+
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- HOW IT WORKS -->
-      <section id="how-it-works">
-        <div class="shell">
-          <div class="section-header">
-            <div class="section-kicker">How PairPerks works</div>
-            <h2 class="section-title">Scan in. Have fun. Review. Share. Unlock more.</h2>
-            <p class="section-sub">
-              PairPerks turns normal going-out behavior into a layered reward system.
-              The more you participate, the more the app opens up secret menus,
-              boosted perks and status for your couple or family.
-            </p>
-          </div>
+<!-- ============================
+     PPX STAKING PREVIEW
+============================= -->
+<section id="staking">
+    <div class="shell">
 
-          <div class="columns">
-            <div class="card">
-              <div class="card-label">Step 1</div>
-              <div class="card-title">Join as a couple or family.</div>
-              <p class="card-sub">
-                Create a CoupleSphere or FamiSphere profile. Optionally verify your ID
-                to get a trust badge and access to “trusted only” discovery.
-              </p>
-              <ul class="card-list">
-                <li>Profiles for each person + shared pair/family profile.</li>
-                <li>Choose your vibes: chill, adventurous, nightlife, family, etc.</li>
-                <li>Control who can see you and how you connect.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag blue">💑 CoupleSphere profiles</span>
-                <span class="tag green">👨‍👩‍👧 FamiSphere profiles</span>
-              </div>
+        <h2 style="font-size:26px; text-align:center; margin-bottom:14px;">Stake PPX, Boost Perks</h2>
+        <p style="text-align:center; color:var(--text-soft); max-width:600px; margin:0 auto 26px;">
+            This is a preview of a future feature. Staking PPX can unlock higher tiers,
+            multipliers, and special perks. Will go live after legal review.
+        </p>
+
+        <div style="
+            background:radial-gradient(circle at top,#0b1220,#020617 70%);
+            padding:24px;
+            border-radius: var(--radius-lg);
+            border:1px solid rgba(31,41,55,1);
+            box-shadow: var(--shadow-strong);
+            max-width:680px;
+            margin:0 auto;
+        ">
+
+            <label>Amount to Stake</label>
+            <input type="number" value="5000" style="
+                width:100%;
+                margin-top:4px;
+                margin-bottom:12px;
+                border-radius:999px;
+                padding:10px;
+                background:rgba(15,23,42,0.9);
+                border:1px solid rgba(55,65,81,1);
+                color:var(--text-main);
+            ">
+
+            <label>Lock Period</label>
+            <select style="
+                width:100%;
+                margin-top:4px;
+                margin-bottom:12px;
+                border-radius:999px;
+                padding:10px;
+                background:rgba(15,23,42,0.9);
+                border:1px solid rgba(55,65,81,1);
+                color:var(--text-main);
+            ">
+                <option>30 days — Base boost</option>
+                <option>90 days — 1.3× multiplier</option>
+                <option>180 days — 1.6× multiplier</option>
+            </select>
+
+            <div style="font-size:12px; color:var(--text-soft); margin-bottom:12px;">
+                *This is not active yet — demo preview only.
             </div>
 
-            <div class="card">
-              <div class="card-label">Step 2</div>
-              <div class="card-title">Pick a PerkPath™ or explore the map.</div>
-              <p class="card-sub">
-                Let the AI build a PerkPath route or browse the map to see which
-                affiliates nearby are offering perks, challenges and hidden QR hunts.
-              </p>
-              <ul class="card-list">
-                <li>Tell the app your budget, time and mood.</li>
-                <li>Get a curated route of 2–6 stops with stacked perks.</li>
-                <li>See which routes give the biggest XP multipliers.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag purple">🧭 PerkPaths™ smart routes</span>
-                <span class="tag gold">🏆 XP multipliers</span>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-label">Step 3</div>
-              <div class="card-title">Check in, play, review and share.</div>
-              <p class="card-sub">
-                Scan in when you arrive, scan out when you leave. Leave a review,
-                share your experience, and watch your PairScore / FamiScore grow.
-              </p>
-              <ul class="card-list">
-                <li>Verified reviews unlock extra perks.</li>
-                <li>Sharing with friends can boost rewards further.</li>
-                <li>Collect badges and climb PairWars leaderboards.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag blue">⭐ Review rewards</span>
-                <span class="tag green">🔗 PairShare™ boosts</span>
-                <span class="tag pink">⚔️ PairWars city challenges</span>
-              </div>
-            </div>
-          </div>
+            <button class="cta-btn" disabled style="opacity:0.6; cursor:not-allowed;">
+                Staking Coming Soon
+            </button>
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- REVIEWS + SHARE REWARDS -->
-      <section id="reviews">
-        <div class="shell">
-          <div class="section-header">
-            <div class="section-kicker">Verified reviews & share rewards</div>
-            <h2 class="section-title">Real reviews. Real perks. Real viral energy.</h2>
-            <p class="section-sub">
-              After every visit, guests are prompted to leave a verified review.
-              Affiliates can reward honest feedback with perks, and guests can earn
-              even more by sharing with their own network.
-            </p>
-          </div>
+<!-- ============================
+        REVIEWS SYSTEM
+============================= -->
+<section id="reviews">
+    <div class="shell">
+        <h2 style="font-size:26px; margin-bottom:16px;">Leave Reviews. Earn Rewards.</h2>
+        <p style="color:var(--text-soft); max-width:620px; font-size:14px;">
+            After visiting a partner location, guests can leave a verified review.
+            Partners can offer bonus perks, discounts, or XP boosts for real reviews.
+        </p>
 
-          <div class="columns">
+        <div class="grid grid-2" style="margin-top:18px;">
             <div class="card">
-              <div class="card-label">Review flow</div>
-              <div class="card-title">Scan out → review → reward.</div>
-              <p class="card-sub">
-                Reviews are only available if you actually scanned in at the location.
-                No fake reviews. No bots. Just real experiences.
-              </p>
-              <ul class="card-list">
-                <li>Star rating + short text + optional photos/videos.</li>
-                <li>“Verified visit” badge attached automatically.</li>
-                <li>XP, PairScore or FamiScore boost for every real review.</li>
-                <li>Special reviewer badges for streaks and high-quality feedback.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag green">✅ Verified-only reviews</span>
-                <span class="tag blue">📸 Photo & video support</span>
-              </div>
+                <h3>🎯 Verified Reviews</h3>
+                Only guests who scanned the partner QR can leave reviews.
+                This keeps reviews authentic and valuable.
             </div>
-
             <div class="card">
-              <div class="card-label">Affiliate rewards</div>
-              <div class="card-title">Businesses pay you in perks, not guesswork.</div>
-              <p class="card-sub">
-                Affiliates can choose exactly how they want to reward reviews and shares.
-                Everything is optional and configurable in the Partner Console.
-              </p>
-              <ul class="card-list">
-                <li>Offer % off next visit, freebies, upgrades or bonus challenges.</li>
-                <li>Turn on “share to unlock extra perk” to drive viral exposure.</li>
-                <li>See which rewards lead to more repeat visits.</li>
-                <li>Promote top customer reviews to the top of your page.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag gold">🎁 Configurable perks</span>
-                <span class="tag purple">📊 Review analytics</span>
-              </div>
+                <h3>🎁 Earn PPX for Reviews</h3>
+                Leave helpful reviews and earn PPX + streak boosts.
             </div>
-
-            <div class="card">
-              <div class="card-label">Share & earn</div>
-              <div class="card-title">PairShare™ turns your night out into content.</div>
-              <p class="card-sub">
-                After reviewing, guests can share a snapshot of their experience with
-                their friends. Affiliates get exposure; guests get boosted rewards.
-              </p>
-              <ul class="card-list">
-                <li>One-tap sharing to SMS, Instagram, TikTok, X and more.</li>
-                <li>Share with up to 5 contacts to unlock special share-based perks.</li>
-                <li>Earn additional XP, badges and PairScore/FamiScore boosts.</li>
-                <li>Special “Social Signal” stats for affiliates in their dashboard.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag pink">📣 PairShare™</span>
-                <span class="tag gold">🏅 Social sharer badges</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- ADVANCED PERK SYSTEMS -->
-      <section id="perk-systems">
-        <div class="shell">
-          <div class="section-header">
-            <div class="section-kicker">Game systems & unique mechanics</div>
-            <h2 class="section-title">Stuff no one else is doing.</h2>
-            <p class="section-sub">
-              PairPerks isn’t just “another discount app.” It’s a stack of gamified
-              systems that make local businesses, resorts and attractions as fun to
-              play as a video game.
-            </p>
-          </div>
+<!-- ============================
+       SHARE & EARN
+============================= -->
+<section id="sharing">
+    <div class="shell">
+        <h2 style="font-size:26px; margin-bottom:14px;">Share Your Experience & Earn More</h2>
+        <p style="color:var(--text-soft); max-width:620px; font-size:14px;">
+            After your visit, you can share your experience with up to 5 contacts.
+            Each verified invite boosts your perks and earns PPX.
+        </p>
 
-          <div class="columns">
-            <!-- PerkPaths + GeoBoost + Dynamic -->
-            <div class="card">
-              <div class="card-label">Smart routing & dynamic perks</div>
-              <div class="card-title">PerkPaths™, GeoBoost™ & Dynamic Perk Boosts.</div>
-              <p class="card-sub">
-                The app doesn’t just show you random deals. It builds routes and adjusts
-                perks in real time based on where you are and what’s happening.
-              </p>
-              <ul class="card-list">
-                <li><strong>PerkPaths™</strong> – AI-built routes optimized for savings, fun and XP.</li>
-                <li><strong>GeoBoost™</strong> – extra discounts and XP when you’re physically close.</li>
-                <li><strong>Dynamic Perk Boosts</strong> – perks that adapt to weather, time and demand.</li>
-                <li><strong>PerkTime Machine</strong> – scroll back in time to see past offers and events.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag purple">🧭 PerkPaths™</span>
-                <span class="tag green">📍 GeoBoost™</span>
-                <span class="tag blue">⏱ Dynamic boosts</span>
-                <span class="tag gold">🕒 PerkTime Machine</span>
-              </div>
-            </div>
-
-            <!-- PairWars, PerkPoker, Auctions -->
-            <div class="card">
-              <div class="card-label">Competitive fun</div>
-              <div class="card-title">PairWars™, PerkPoker™ & live auctions.</div>
-              <p class="card-sub">
-                Friendly competition that uses XP and in-app points, not real money.
-                Keeps couples and families engaged long-term.
-              </p>
-              <ul class="card-list">
-                <li><strong>PairWars™</strong> – city-wide challenges like “5 new spots this month.”</li>
-                <li><strong>PerkPoker™</strong> – bet XP for a chance at bigger perks.</li>
-                <li><strong>Live Perk Auctions</strong> – bid XP for VIP tables, upgrades or last-minute deals.</li>
-                <li><strong>NumberGuess mini-games</strong> – affiliates lock in a number, guests guess for rewards.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag pink">⚔️ PairWars™</span>
-                <span class="tag purple">🃏 PerkPoker™</span>
-                <span class="tag gold">🏷 Live auctions</span>
-              </div>
-            </div>
-
-            <!-- Secret menu, insurance, matching, flash link -->
-            <div class="card">
-              <div class="card-label">Status, safety & social</div>
-              <div class="card-title">Secret menus, Perk Insurance & Flash-Link.</div>
-              <p class="card-sub">
-                Long-term engagement comes from status, safety and connection –
-                not just coupons.
-              </p>
-              <ul class="card-list">
-                <li><strong>Secret Menu unlocks</strong> – hidden perks that appear at XP milestones.</li>
-                <li><strong>Perk Insurance</strong> – protect a perk for a tiny fee or XP cost.</li>
-                <li><strong>Compatibility matching</strong> – help couples/families find the right double-date fit.</li>
-                <li><strong>Flash-Link QR</strong> – when two pairs meet in person, they scan each other and both get rewards.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag gold">🔐 Secret menus</span>
-                <span class="tag blue">🛡 Perk Insurance</span>
-                <span class="tag green">💬 Matching</span>
-                <span class="tag pink">⚡ Flash-Link</span>
-              </div>
-            </div>
-          </div>
+        <div class="card" style="margin-top:18px;">
+            <h3>📣 Reward Structure</h3>
+            <ul style="padding-left:18px; font-size:13px;">
+                <li>+50–200 PPX per validated share</li>
+                <li>Special streak boosts for weekly sharing</li>
+                <li>Unlock unique seasonal perks</li>
+                <li>Top sharers get featured in the PairPerks spotlight</li>
+            </ul>
         </div>
-      </section>
+    </div>
+</section>
 
-      <!-- PARTNERS / AFFILIATES -->
-      <section id="partners">
-        <div class="shell">
-          <div class="section-header">
-            <div class="section-kicker">For businesses, resorts & attractions</div>
-            <h2 class="section-title">Turn empty slots into loyal couples & families.</h2>
-            <p class="section-sub">
-              PairPerks is built for arcades, restaurants, hotels, resorts, family fun
-              centers and attractions that want people who actually show up in pairs.
-            </p>
-          </div>
+<br><br><br>
 
-          <div class="columns">
-            <div class="card">
-              <div class="card-label">Partner console</div>
-              <div class="card-title">Set perks, challenges and review rewards.</div>
-              <p class="card-sub">
-                Control everything from a single dashboard: perks, QR placements,
-                challenges, review rewards and more.
-              </p>
-              <ul class="card-list">
-                <li>Create pair/family-only deals that unlock at check-in.</li>
-                <li>Hide QR codes for hunts, riddles and milestone bonuses.</li>
-                <li>Offer rewards for reviews and social sharing.</li>
-                <li>Optionally enable PerkPoker, PairWars participation and auctions.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag blue">🎯 High-intent traffic</span>
-                <span class="tag green">🔧 Full control</span>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-label">Data & reputation</div>
-              <div class="card-title">See what works. Build a public score.</div>
-              <p class="card-sub">
-                Your profile becomes a living proof of how well you treat couples
-                and families.
-              </p>
-              <ul class="card-list">
-                <li>Average rating, repeat-visit stats, and review insights.</li>
-                <li>SafeMeet / FamilySafe reputation scoring.</li>
-                <li>Top routes you’re part of and how often they’re completed.</li>
-                <li>Social shares and PairShare impact metrics.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag gold">📊 Reputation engine</span>
-                <span class="tag purple">📈 Route analytics</span>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-label">Monetization ideas</div>
-              <div class="card-title">Win-win revenue for you and PairPerks.</div>
-              <p class="card-sub">
-                PairPerks stays free for guests and sustainable through smart,
-                performance-based partner options.
-              </p>
-              <ul class="card-list">
-                <li>Tiered partner plans (Starter, Pro, Elite, Enterprise).</li>
-                <li>Optional fees on share-based rewards and Perk Insurance.</li>
-                <li>Sponsorship slots on home and city-wide PairWars events.</li>
-                <li>Future API access and full white-label options.</li>
-              </ul>
-              <div class="tag-row">
-                <span class="tag green">💰 Performance-only fees</span>
-                <span class="tag gold">⭐ Sponsorships</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="shell footer-inner">
-        <div>© <span id="year"></span> PairPerks™ · Love More. Spend Less. Earn More.</div>
-        <div class="footer-links">
-          <span class="footer-link">Instagram</span>
-          <span class="footer-link">TikTok</span>
-          <span class="footer-link">X</span>
-          <span class="footer-link" onclick="window.location.href='landing.html'">Join Waitlist</span>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
