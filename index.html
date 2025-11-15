@@ -1078,24 +1078,91 @@
                 </ul>
               </div>
 
-       <div style="width: 100%; display: flex; justify-content: center;">
-  <iframe
-    src="https://docs.google.com/forms/d/e/1FAIpQLSfVmH5AZg-r_tUvjYZB7HsB4NAozugqPL0it_EqaxHt3KxaHA/viewform?embedded=true"
-    width="100%"
-    height="1400"
-    frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-    style="
-      border-radius: 18px;
-      background: white;
-      max-width: 650px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.45);
-    "
-  >
-    Loading…
-  </iframe>
+      <style>
+  /* Smooth fade-in animation */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.94);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Loading shimmer animation */
+  @keyframes shimmer {
+    0% { background-position: -450px 0 }
+    100% { background-position: 450px 0 }
+  }
+
+  .form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 650px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.7);
+    box-shadow: 0 0 35px rgba(59,130,246,0.35),
+                0 0 60px rgba(236,72,153,0.25);
+    border: 1px solid rgba(59,130,246,0.35);
+    backdrop-filter: blur(16px);
+    animation: fadeInScale 0.8s ease-out forwards;
+  }
+
+  /* Shimmer placeholder while loading */
+  .form-loading {
+    height: 900px;
+    border-radius: 20px;
+    background: linear-gradient(
+      to right,
+      #1e293b 0%,
+      #0f172a 20%,
+      #1e293b 40%,
+      #0f172a 100%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.8s infinite linear;
+  }
+</style>
+
+<div class="form-wrapper">
+  <div class="form-container" id="formContainer">
+    <div class="form-loading" id="formLoading"></div>
+
+    <iframe
+      id="formIframe"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfVmH5AZg-r_tUvjYZB7HsB4NAozugqPL0it_EqaxHt3KxaHA/viewform?embedded=true"
+      width="100%"
+      height="1400"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      style="display:none; border:0; border-radius: 20px;"
+    >
+    </iframe>
+  </div>
 </div>
+
+<script>
+  // Reveal the form + hide the shimmer after it loads
+  const iframe = document.getElementById("formIframe");
+  const loading = document.getElementById("formLoading");
+
+  iframe.onload = function () {
+    loading.style.display = "none";
+    iframe.style.display = "block";
+  };
+</script>
+
 
             </div>
           </div>
@@ -1121,4 +1188,5 @@
   </script>
 </body>
 </html>
+
 
